@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masuk – PPDB SMP Negeri 22 Kota Pontianak</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ══ TOAST CONTAINER ════════════════════════════════════ -->
+    <div id="toast-container"></div>
+
+    <!-- ══ MODAL ═════════════════════════════════════════════ -->
+    <div id="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-icon" id="modal-icon">?</div>
+          <div class="modal-title" id="modal-title">Konfirmasi</div>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="modal-cancel" onclick="closeModal()">Batal</button>
+          <button class="btn btn-primary btn-lg" id="modal-confirm" onclick="confirmModal()">Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ NAVIGASI HALAMAN (Demo Switcher) ══════════════════════════ -->
+    <div class="page-tabs">
+      <a class="page-tab" href="index.html">🏠 Beranda</a>
+      <a class="page-tab active" href="login.html">🔑 Login</a>
+      <a class="page-tab" href="register.html">📝 Pendaftaran</a>
+      <a class="page-tab" href="dashboard.html">📊 Dashboard Admin</a>
+      <a class="page-tab" href="result.html">🎉 Pengumuman</a>
+    </div>
+
+      <div class="login-page">
+        <!-- Kiri -->
+        <div class="login-left">
+          <div class="login-left-content">
+            <a
+              href="#"
+              class="nav-logo"
+              style="margin-bottom: 28px; display: inline-flex"
+              onclick="showPage('landing')"
+            >
+              <div class="nav-logo-icon">22</div>
+              <span class="nav-logo-text" style="color: #fff">PPDB Online</span>
+            </a>
+            <h2>Selamat Datang di<br />PPDB SMP Negeri 22</h2>
+            <p>
+              Masuk untuk memantau status pendaftaran, melihat hasil seleksi,
+              dan mengelola data putra/putri Anda.
+            </p>
+            <div class="login-features">
+              <div class="login-feature">
+                <div class="login-feature-icon">🔒</div>
+                <span>Data terenkripsi &amp; terlindungi dengan SSL/TLS</span>
+              </div>
+              <div class="login-feature">
+                <div class="login-feature-icon">📱</div>
+                <span>Notifikasi real-time via Email &amp; WhatsApp</span>
+              </div>
+              <div class="login-feature">
+                <div class="login-feature-icon">⚡</div>
+                <span>Pantau status pendaftaran kapan saja</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kanan -->
+        <div class="login-right">
+          <div class="login-form-wrap">
+            <h3>Masuk ke Akun</h3>
+            <p class="subtitle">
+              Pilih jenis akun dan masukkan kredensial Anda
+            </p>
+
+            <div class="login-tabs">
+              <button
+                class="login-tab active"
+                data-role="peserta"
+                onclick="switchLoginTab('peserta')"
+              >
+                👤 Peserta / Orang Tua
+              </button>
+              <button
+                class="login-tab"
+                data-role="admin"
+                onclick="switchLoginTab('admin')"
+              >
+                🛡️ Admin / Panitia
+              </button>
+            </div>
+
+            <!-- Peserta -->
+            <div id="login-fields-peserta">
+              <div class="form-group">
+                <label class="form-label"
+                  >NIK Siswa atau Email <span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="NIK 16 digit / email@contoh.com"
+                  value="0087654321"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Kata Sandi <span class="req">*</span></label
+                >
+                <input
+                  type="password"
+                  class="form-input"
+                  placeholder="Masukkan kata sandi"
+                  value="demo1234"
+                />
+              </div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 20px;
+                "
+              >
+                <div class="form-check" style="margin: 0">
+                  <input type="checkbox" id="remember-peserta" checked />
+                  <label for="remember-peserta">Ingat saya</label>
+                </div>
+                <a href="#" class="form-link">Lupa kata sandi?</a>
+              </div>
+              <button
+                class="btn btn-primary btn-lg btn-block"
+                id="btn-login-peserta"
+                onclick="doLogin()"
+              >
+                Masuk sebagai Peserta
+              </button>
+              <div class="form-divider">atau</div>
+              <button
+                class="btn btn-block"
+                style="
+                  background: var(--gray-100);
+                  color: var(--gray-600);
+                  padding: 12px;
+                "
+              >
+                🔵 Masuk dengan Google
+              </button>
+              <p
+                style="
+                  text-align: center;
+                  margin-top: 20px;
+                  font-size: 13px;
+                  color: var(--gray-500);
+                "
+              >
+                Belum punya akun?
+                <a href="#" class="form-link" onclick="showPage('register')"
+                  >Daftar Sekarang</a
+                >
+              </p>
+            </div>
+
+            <!-- Admin -->
+            <div id="login-fields-admin" style="display: none">
+              <div class="form-group">
+                <label class="form-label"
+                  >Username Admin <span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="admin.sekolah"
+                  value="admin.smpn22"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Kata Sandi <span class="req">*</span></label
+                >
+                <input
+                  type="password"
+                  class="form-input"
+                  placeholder="Kata sandi admin"
+                  value="admin2026"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Kode OTP (dikirim ke email admin)
+                  <span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="6 digit OTP"
+                  maxlength="6"
+                  value="847291"
+                  style="
+                    letter-spacing: 4px;
+                    font-size: 18px;
+                    text-align: center;
+                  "
+                />
+              </div>
+              <button
+                class="btn btn-primary btn-lg btn-block"
+                id="btn-login-admin"
+                onclick="doLoginAdmin()"
+              >
+                🛡️ Masuk sebagai Admin
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

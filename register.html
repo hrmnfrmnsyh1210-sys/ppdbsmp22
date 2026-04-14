@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulir Pendaftaran – PPDB SMP Negeri 22 Kota Pontianak</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ══ TOAST CONTAINER ════════════════════════════════════ -->
+    <div id="toast-container"></div>
+
+    <!-- ══ MODAL ═════════════════════════════════════════════ -->
+    <div id="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-icon" id="modal-icon">?</div>
+          <div class="modal-title" id="modal-title">Konfirmasi</div>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="modal-cancel" onclick="closeModal()">Batal</button>
+          <button class="btn btn-primary btn-lg" id="modal-confirm" onclick="confirmModal()">Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ NAVIGASI HALAMAN (Demo Switcher) ══════════════════════════ -->
+    <div class="page-tabs">
+      <a class="page-tab" href="index.html">🏠 Beranda</a>
+      <a class="page-tab" href="login.html">🔑 Login</a>
+      <a class="page-tab active" href="register.html">📝 Pendaftaran</a>
+      <a class="page-tab" href="dashboard.html">📊 Dashboard Admin</a>
+      <a class="page-tab" href="result.html">🎉 Pengumuman</a>
+    </div>
+
+      <nav class="nav">
+        <div class="nav-inner">
+          <a href="#" class="nav-logo" onclick="showPage('landing')">
+            <div class="nav-logo-icon">22</div>
+            <span class="nav-logo-text">PPDB Online</span>
+          </a>
+          <div class="nav-links">
+            <a href="#" onclick="showPage('landing')">Beranda</a>
+            <a href="#" class="active">Pendaftaran</a>
+          </div>
+          <div class="nav-actions">
+            <button class="btn btn-ghost" onclick="showPage('login')">
+              Masuk
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="form-page">
+        <div class="form-container">
+          <!-- Judul -->
+          <div style="text-align: center; margin-bottom: 28px">
+            <h2
+              style="
+                font-family: var(--font-display);
+                font-size: 26px;
+                color: var(--navy);
+                margin-bottom: 6px;
+              "
+            >
+              Formulir Pendaftaran PPDB SMP Negeri 22
+            </h2>
+            <p style="font-size: 14px; color: var(--gray-500)">
+              Tahun Ajaran 2026/2027
+            </p>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="form-progress">
+            <div class="form-step-indicator"></div>
+            <div class="form-step-indicator"></div>
+            <div class="form-step-indicator"></div>
+            <div class="form-step-indicator"></div>
+            <div class="form-step-indicator"></div>
+          </div>
+          <div class="form-step-labels">
+            <span class="form-step-label">Akun</span>
+            <span class="form-step-label">Data Siswa</span>
+            <span class="form-step-label">Orang Tua</span>
+            <span class="form-step-label">Dokumen</span>
+            <span class="form-step-label">Konfirmasi</span>
+          </div>
+
+          <!-- No. Pendaftaran Info Bar -->
+          <div
+            class="form-card"
+            style="
+              background: linear-gradient(
+                135deg,
+                rgba(46, 134, 222, 0.04),
+                rgba(0, 206, 201, 0.04)
+              );
+              border-color: rgba(46, 134, 222, 0.15);
+              padding: 16px 24px;
+              margin-bottom: 20px;
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 12px">
+              <span style="font-size: 20px">📋</span>
+              <div style="flex: 1">
+                <div
+                  style="font-size: 13px; font-weight: 700; color: var(--navy)"
+                >
+                  Formulir Pendaftaran PPDB SMP Negeri 22 Online
+                </div>
+                <div style="font-size: 12px; color: var(--gray-500)">
+                  No. Sesi: PPDB-2026-DRAFT • Mohon lengkapi semua langkah
+                </div>
+              </div>
+              <span class="status-badge new" id="form-step-badge"
+                ><span class="status-dot"></span>Step 1 dari 5</span
+              >
+            </div>
+          </div>
+
+          <!-- ══ STEP 1: BUAT AKUN ══════════════════════════════ -->
+          <div class="form-step-section" data-step="1">
+            <div class="form-card">
+              <div class="form-card-title">🔐 Buat Akun Pendaftaran</div>
+              <div class="form-card-desc">
+                Akun ini digunakan untuk login dan memantau status pendaftaran
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label"
+                    >NIK Siswa <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="16 digit NIK sesuai KK"
+                    maxlength="16"
+                    value="6171010203040001"
+                  />
+                  <div class="form-hint">
+                    Nomor Induk Kependudukan dari Kartu Keluarga
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >NISN <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="10 digit NISN"
+                    maxlength="10"
+                    value="0087654321"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Email Aktif <span class="req">*</span></label
+                >
+                <input
+                  type="email"
+                  class="form-input"
+                  placeholder="email@contoh.com"
+                  value="rizky.akbar@gmail.com"
+                />
+                <div class="form-hint">
+                  Notifikasi &amp; hasil seleksi akan dikirim ke email ini
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Nomor WhatsApp <span class="req">*</span></label
+                >
+                <input
+                  type="tel"
+                  class="form-input"
+                  placeholder="08xxxxxxxxxx"
+                  value="081234567890"
+                  style="max-width: 360px"
+                />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Kata Sandi <span class="req">*</span></label
+                  >
+                  <input
+                    type="password"
+                    class="form-input"
+                    placeholder="Min. 8 karakter"
+                    oninput="checkPassword(this)"
+                  />
+                  <div class="password-strength">
+                    <div
+                      class="password-strength-bar"
+                      id="password-strength-bar"
+                    ></div>
+                  </div>
+                  <div class="form-hint">
+                    Kombinasi huruf besar, angka, dan simbol
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Konfirmasi Kata Sandi <span class="req">*</span></label
+                  >
+                  <input
+                    type="password"
+                    class="form-input"
+                    placeholder="Ulangi kata sandi"
+                  />
+                </div>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="agree-terms" checked />
+                <label for="agree-terms"
+                  >Saya menyetujui
+                  <a href="#" class="form-link">Syarat &amp; Ketentuan</a> dan
+                  <a href="#" class="form-link">Kebijakan Privasi</a> PPDB SMP
+                  Online.</label
+                >
+              </div>
+            </div>
+          </div>
+          <!-- /step 1 -->
+
+          <!-- ══ STEP 2: DATA SISWA ══════════════════════════════ -->
+          <div class="form-step-section" data-step="2">
+            <div class="form-card">
+              <div class="form-card-title">👤 Data Diri Siswa</div>
+              <div class="form-card-desc">
+                Isi sesuai dokumen resmi (Akta Kelahiran / Ijazah SD)
+              </div>
+              <div class="form-row">
+                <div class="form-group" style="grid-column: span 2">
+                  <label class="form-label"
+                    >Nama Lengkap <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="Nama sesuai Akta Kelahiran"
+                    value="Rizky Akbar Pratama"
+                  />
+                </div>
+              </div>
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Jenis Kelamin <span class="req">*</span></label
+                  >
+                  <select class="form-input">
+                    <option selected>Laki-laki</option>
+                    <option>Perempuan</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Tempat Lahir <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="Kota/kabupaten"
+                    value="Pontianak"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Tanggal Lahir <span class="req">*</span></label
+                  >
+                  <input type="date" class="form-input" value="2013-03-15" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Agama <span class="req">*</span></label
+                  >
+                  <select class="form-input">
+                    <option selected>Islam</option>
+                    <option>Kristen Protestan</option>
+                    <option>Kristen Katolik</option>
+                    <option>Hindu</option>
+                    <option>Buddha</option>
+                    <option>Konghucu</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Anak ke- <span class="req">*</span></label
+                  >
+                  <input
+                    type="number"
+                    class="form-input"
+                    min="1"
+                    value="1"
+                    style="max-width: 120px"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">🏫 Asal Sekolah</div>
+              <div class="form-card-desc">
+                Data SD/MI tempat siswa menyelesaikan pendidikan dasar
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Nama SD/MI Asal <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="Contoh: SDN 1 Pontianak"
+                    value="SDN 1 Pontianak"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">NPSN Sekolah Asal</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="8 digit NPSN"
+                    value="30101234"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Tahun Lulus <span class="req">*</span></label
+                >
+                <select class="form-input" style="max-width: 200px">
+                  <option selected>2026</option>
+                  <option>2025</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">🎯 Pilihan Sekolah &amp; Jalur</div>
+              <div class="form-card-desc">
+                Pilih sekolah tujuan dan jalur pendaftaran yang sesuai
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Pilihan Sekolah 1 <span class="req">*</span></label
+                  >
+                  <select class="form-input">
+                    <option selected>SMP Negeri 22 Pontianak</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Pilihan Sekolah 2</label>
+                  <select class="form-input">
+                    <option>— Tidak Memilih —</option>
+                  </select>
+                </div>
+              </div>
+
+              <label class="form-label" style="margin-bottom: 10px"
+                >Jalur Pendaftaran <span class="req">*</span></label
+              >
+              <div class="jalur-radio-group">
+                <label class="jalur-radio selected" onclick="selectJalur(this)">
+                  <input type="radio" name="jalur" value="zonasi" checked />
+                  <div class="jalur-radio-text">
+                    <strong>📍 Zonasi</strong>
+                    <span>Berdasarkan jarak domisili</span>
+                  </div>
+                </label>
+                <label class="jalur-radio" onclick="selectJalur(this)">
+                  <input type="radio" name="jalur" value="prestasi" />
+                  <div class="jalur-radio-text">
+                    <strong>🏆 Prestasi</strong>
+                    <span>Nilai rapor &amp; lomba</span>
+                  </div>
+                </label>
+                <label class="jalur-radio" onclick="selectJalur(this)">
+                  <input type="radio" name="jalur" value="afirmasi" />
+                  <div class="jalur-radio-text">
+                    <strong>🤝 Afirmasi</strong>
+                    <span>KIP / PKH / SKTM</span>
+                  </div>
+                </label>
+                <label class="jalur-radio" onclick="selectJalur(this)">
+                  <input type="radio" name="jalur" value="pindah" />
+                  <div class="jalur-radio-text">
+                    <strong>🔄 Pindah Tugas</strong>
+                    <span>ASN / TNI / Polri</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Kondisional: Prestasi -->
+              <div id="field-prestasi" style="display: none; margin-top: 16px">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Nilai Rata-rata Rapor Sem. 1–5
+                      <span class="req">*</span></label
+                    >
+                    <input
+                      type="number"
+                      class="form-input"
+                      placeholder="0.00 – 100.00"
+                      min="0"
+                      max="100"
+                      step="0.01"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Jenis Prestasi Lomba</label>
+                    <select class="form-input">
+                      <option>— Tidak Ada —</option>
+                      <option>Olimpiade Sains Tingkat Kab./Kota</option>
+                      <option>Olimpiade Sains Tingkat Provinsi</option>
+                      <option>Olimpiade Sains Tingkat Nasional</option>
+                      <option>Seni/Olahraga Tingkat Kab./Kota</option>
+                      <option>Seni/Olahraga Tingkat Provinsi</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Kondisional: Afirmasi -->
+              <div id="field-afirmasi" style="display: none; margin-top: 16px">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Jenis Dokumen Afirmasi <span class="req">*</span></label
+                  >
+                  <select class="form-input">
+                    <option>Kartu Indonesia Pintar (KIP)</option>
+                    <option>Kartu PKH / DTKS</option>
+                    <option>Surat Keterangan Tidak Mampu (SKTM)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Kondisional: Pindah Tugas -->
+              <div id="field-pindah" style="display: none; margin-top: 16px">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Instansi Orang Tua <span class="req">*</span></label
+                  >
+                  <select class="form-input">
+                    <option>Aparatur Sipil Negara (ASN)</option>
+                    <option>TNI – Tentara Nasional Indonesia</option>
+                    <option>Polri – Kepolisian RI</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /step 2 -->
+
+          <!-- ══ STEP 3: DATA ORANG TUA ══════════════════════════ -->
+          <div class="form-step-section" data-step="3">
+            <div class="form-card">
+              <div class="form-card-title">👨 Data Ayah</div>
+              <div class="form-card-desc">
+                Lengkapi data ayah kandung atau ayah tiri
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Nama Lengkap Ayah <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="Nama sesuai KTP"
+                    value="Ahmad Subagyo"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >NIK Ayah <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="16 digit NIK"
+                    value="6171••••••••0001"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Pekerjaan</label>
+                  <select class="form-input">
+                    <option>Pegawai Negeri Sipil (PNS)</option>
+                    <option>Pegawai Swasta</option>
+                    <option selected>Wiraswasta</option>
+                    <option>TNI/Polri</option>
+                    <option>Petani/Nelayan</option>
+                    <option>Lainnya</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Penghasilan per Bulan</label>
+                  <select class="form-input">
+                    <option>Kurang dari Rp 1.000.000</option>
+                    <option>Rp 1.000.000 – Rp 3.000.000</option>
+                    <option selected>Rp 3.000.000 – Rp 5.000.000</option>
+                    <option>Rp 5.000.000 – Rp 10.000.000</option>
+                    <option>Lebih dari Rp 10.000.000</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nomor HP Ayah</label>
+                <input
+                  type="tel"
+                  class="form-input"
+                  placeholder="08xxxxxxxxxx"
+                  value="081234567890"
+                  style="max-width: 360px"
+                />
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">👩 Data Ibu</div>
+              <div class="form-card-desc">
+                Lengkapi data ibu kandung atau ibu tiri
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Nama Lengkap Ibu <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="Nama sesuai KTP"
+                    value="Siti Nurhaliza"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >NIK Ibu <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="16 digit NIK"
+                    value="6171••••••••0002"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Pekerjaan</label>
+                  <select class="form-input">
+                    <option selected>Ibu Rumah Tangga</option>
+                    <option>Pegawai Negeri Sipil (PNS)</option>
+                    <option>Pegawai Swasta</option>
+                    <option>Wiraswasta</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Penghasilan per Bulan</label>
+                  <select class="form-input">
+                    <option selected>Tidak Berpenghasilan</option>
+                    <option>Kurang dari Rp 1.000.000</option>
+                    <option>Rp 1.000.000 – Rp 3.000.000</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nomor HP Ibu</label>
+                <input
+                  type="tel"
+                  class="form-input"
+                  placeholder="08xxxxxxxxxx"
+                  value="081298765432"
+                  style="max-width: 360px"
+                />
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">🏠 Alamat Orang Tua / Wali</div>
+              <div class="form-card-desc">
+                Alamat sesuai Kartu Keluarga (KK)
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Alamat Lengkap <span class="req">*</span></label
+                >
+                <textarea
+                  class="form-input"
+                  placeholder="Jalan, RT/RW, Kelurahan, Kecamatan"
+                >
+Jl. Tanjungpura No. 42, RT 003/RW 012, Kel. Benua Melayu Darat, Kec. Pontianak Selatan</textarea
+                >
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Kota / Kabupaten <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    value="Kota Pontianak"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Provinsi <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    value="Kalimantan Barat"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Kode Pos</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  value="78243"
+                  style="max-width: 160px"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- /step 3 -->
+
+          <!-- ══ STEP 4: UPLOAD DOKUMEN ══════════════════════════ -->
+          <div class="form-step-section" data-step="4">
+            <div class="form-card">
+              <div class="form-card-title">📁 Upload Dokumen Wajib</div>
+              <div class="form-card-desc">
+                Klik area upload atau tombol "Pilih File" untuk memilih dokumen.
+                Format: PDF/JPG/PNG, maks. 2 MB per file.
+              </div>
+              <div class="upload-grid">
+                <!-- Ijazah -->
+                <div class="upload-doc-card">
+                  <div class="upload-doc-header">
+                    <span class="upload-doc-title">📄 Ijazah / SKL SD/MI</span>
+                    <span class="badge-required">Wajib</span>
+                  </div>
+                  <div class="upload-doc-body">
+                    <div
+                      class="upload-area uploaded"
+                      id="upload-ijazah"
+                      onclick="
+                        triggerUpload('upload-ijazah', 'Ijazah_SDN1_Rizky')
+                      "
+                    >
+                      <div class="upload-icon">📤</div>
+                      <div class="upload-text">
+                        <strong>Klik untuk pilih file</strong> atau seret ke
+                        sini
+                      </div>
+                      <div class="upload-hint">PDF / JPG · Maks. 2 MB</div>
+                    </div>
+                    <div class="file-item">
+                      <span class="file-item-icon">📄</span>
+                      <div class="file-item-info">
+                        <div class="file-item-name">Ijazah_SDN1_Rizky.pdf</div>
+                        <div class="file-item-size">
+                          267 KB · PDF · ✅ Siap diunggah
+                        </div>
+                      </div>
+                      <button
+                        class="file-item-remove"
+                        onclick="removeUpload('upload-ijazah', this)"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- KK -->
+                <div class="upload-doc-card">
+                  <div class="upload-doc-header">
+                    <span class="upload-doc-title">🏠 Kartu Keluarga</span>
+                    <span class="badge-required">Wajib</span>
+                  </div>
+                  <div class="upload-doc-body">
+                    <div
+                      class="upload-area"
+                      id="upload-kk"
+                      onclick="
+                        triggerUpload('upload-kk', 'Kartu_Keluarga_Subagyo')
+                      "
+                    >
+                      <div class="upload-icon">📤</div>
+                      <div class="upload-text">
+                        <strong>Klik untuk pilih file</strong> atau seret ke
+                        sini
+                      </div>
+                      <div class="upload-hint">PDF / JPG · Maks. 2 MB</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Akta -->
+                <div class="upload-doc-card">
+                  <div class="upload-doc-header">
+                    <span class="upload-doc-title">📋 Akta Kelahiran</span>
+                    <span class="badge-required">Wajib</span>
+                  </div>
+                  <div class="upload-doc-body">
+                    <div
+                      class="upload-area"
+                      id="upload-akta"
+                      onclick="triggerUpload('upload-akta', 'Akta_Lahir_Rizky')"
+                    >
+                      <div class="upload-icon">📤</div>
+                      <div class="upload-text">
+                        <strong>Klik untuk pilih file</strong> atau seret ke
+                        sini
+                      </div>
+                      <div class="upload-hint">PDF / JPG · Maks. 2 MB</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pas Foto -->
+                <div class="upload-doc-card">
+                  <div class="upload-doc-header">
+                    <span class="upload-doc-title">🖼️ Pas Foto 3×4</span>
+                    <span class="badge-required">Wajib</span>
+                  </div>
+                  <div class="upload-doc-body">
+                    <div
+                      class="upload-area"
+                      id="upload-foto"
+                      onclick="
+                        triggerUpload('upload-foto', 'PasFoto_Rizky_3x4')
+                      "
+                    >
+                      <div class="upload-icon">📷</div>
+                      <div class="upload-text">
+                        <strong>Klik untuk pilih foto</strong>
+                      </div>
+                      <div class="upload-hint">
+                        JPG/PNG · Latar merah · Maks. 500 KB
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">📎 Dokumen Pendukung Jalur</div>
+              <div class="form-card-desc">
+                Upload dokumen tambahan sesuai jalur pendaftaran yang dipilih
+                (Zonasi: tidak diperlukan)
+              </div>
+              <div class="upload-grid">
+                <div class="upload-doc-card">
+                  <div class="upload-doc-header">
+                    <span class="upload-doc-title"
+                      >📊 Rapor SD/MI Sem. 1–5</span
+                    >
+                    <span class="badge-optional">Prestasi</span>
+                  </div>
+                  <div class="upload-doc-body">
+                    <div
+                      class="upload-area"
+                      id="upload-rapor"
+                      onclick="
+                        triggerUpload('upload-rapor', 'Rapor_Sem1-5_Rizky')
+                      "
+                    >
+                      <div class="upload-icon">📤</div>
+                      <div class="upload-text">
+                        <strong>Klik untuk pilih file</strong>
+                      </div>
+                      <div class="upload-hint">PDF · Maks. 5 MB</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="upload-doc-card">
+                  <div class="upload-doc-header">
+                    <span class="upload-doc-title">💳 KIP / SKTM</span>
+                    <span class="badge-optional">Afirmasi</span>
+                  </div>
+                  <div class="upload-doc-body">
+                    <div
+                      class="upload-area"
+                      id="upload-kip"
+                      onclick="triggerUpload('upload-kip', 'KIP_Rizky')"
+                    >
+                      <div class="upload-icon">📤</div>
+                      <div class="upload-text">
+                        <strong>Klik untuk pilih file</strong>
+                      </div>
+                      <div class="upload-hint">PDF / JPG · Maks. 2 MB</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /step 4 -->
+
+          <!-- ══ STEP 5: KONFIRMASI ══════════════════════════════ -->
+          <div class="form-step-section" data-step="5">
+            <div class="confirm-summary">
+              <div class="confirm-summary-header">
+                <h4>📋 Ringkasan Data Pendaftaran</h4>
+                <p>Periksa kembali sebelum mengirimkan formulir</p>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Nama Lengkap</span
+                ><span class="confirm-row-value">Rizky Akbar Pratama</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">NISN</span
+                ><span class="confirm-row-value">0087654321</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Tanggal Lahir</span
+                ><span class="confirm-row-value"
+                  >15 Maret 2013 · Pontianak</span
+                >
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Asal SD/MI</span
+                ><span class="confirm-row-value"
+                  >SDN 1 Pontianak (Lulus 2026)</span
+                >
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Jalur Pendaftaran</span
+                ><span class="confirm-row-value">📍 Zonasi</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Pilihan Sekolah 1</span
+                ><span class="confirm-row-value">SMP Negeri 22 Pontianak</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Pilihan Sekolah 2</span
+                ><span class="confirm-row-value">SMP Negeri 22 Pontianak</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Nama Ayah</span
+                ><span class="confirm-row-value">Ahmad Subagyo</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Nama Ibu</span
+                ><span class="confirm-row-value">Siti Nurhaliza</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Alamat KK</span
+                ><span class="confirm-row-value"
+                  >Jl. Tanjungpura No. 42, Pontianak Selatan</span
+                >
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Status Dokumen</span>
+                <span class="confirm-row-value" style="color: var(--green)"
+                  >✅ Ijazah diunggah · ⬜ KK · ⬜ Akta · ⬜ Foto</span
+                >
+              </div>
+            </div>
+
+            <div class="form-card">
+              <div class="form-card-title">✅ Pernyataan &amp; Pengiriman</div>
+              <div class="form-card-desc">
+                Baca dan centang pernyataan berikut sebelum mengirimkan formulir
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="declare-1" checked />
+                <label for="declare-1"
+                  >Saya menyatakan bahwa seluruh data dan dokumen yang saya
+                  isi/unggah adalah
+                  <strong>benar dan dapat dipertanggungjawabkan</strong>.</label
+                >
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="declare-2" checked />
+                <label for="declare-2"
+                  >Saya memahami bahwa data yang sudah dikirimkan
+                  <strong>tidak dapat diubah</strong> tanpa persetujuan panitia
+                  PPDB.</label
+                >
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="declare-3" checked />
+                <label for="declare-3"
+                  >Saya bersedia untuk daftar ulang jika dinyatakan
+                  <strong>diterima</strong> sesuai jadwal yang
+                  ditentukan.</label
+                >
+              </div>
+              <div class="info-box" style="margin-top: 8px">
+                <span class="info-box-icon">💡</span>
+                <div class="info-box-text">
+                  Setelah dikirim, Anda akan menerima
+                  <strong>email konfirmasi</strong> dengan nomor pendaftaran
+                  resmi. Gunakan nomor tersebut untuk mengecek status di halaman
+                  Pengumuman.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /step 5 -->
+
+          <!-- Navigasi Form -->
+          <div class="form-actions">
+            <button
+              class="btn btn-secondary"
+              id="btn-prev"
+              onclick="prevStep()"
+              style="visibility: hidden"
+            >
+              ← Sebelumnya
+            </button>
+            <button
+              class="btn btn-primary btn-lg"
+              id="btn-next"
+              onclick="nextStep()"
+            >
+              Selanjutnya →
+            </button>
+          </div>
+        </div>
+      </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

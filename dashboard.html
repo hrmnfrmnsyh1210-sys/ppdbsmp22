@@ -1,0 +1,1865 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin – PPDB SMP Negeri 22 Kota Pontianak</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ══ TOAST CONTAINER ════════════════════════════════════ -->
+    <div id="toast-container"></div>
+
+    <!-- ══ MODAL ═════════════════════════════════════════════ -->
+    <div id="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-icon" id="modal-icon">?</div>
+          <div class="modal-title" id="modal-title">Konfirmasi</div>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="modal-cancel" onclick="closeModal()">Batal</button>
+          <button class="btn btn-primary btn-lg" id="modal-confirm" onclick="confirmModal()">Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ NAVIGASI HALAMAN (Demo Switcher) ══════════════════════════ -->
+    <div class="page-tabs">
+      <a class="page-tab" href="index.html">🏠 Beranda</a>
+      <a class="page-tab" href="login.html">🔑 Login</a>
+      <a class="page-tab" href="register.html">📝 Pendaftaran</a>
+      <a class="page-tab active" href="dashboard.html">📊 Dashboard Admin</a>
+      <a class="page-tab" href="result.html">🎉 Pengumuman</a>
+    </div>
+
+      <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <a href="#" class="sidebar-logo" onclick="showPage('landing')">
+            <div class="nav-logo-icon">22</div>
+            <span>PPDB Admin</span>
+          </a>
+
+          <div class="sidebar-section">
+            <div class="sidebar-label">Utama</div>
+            <a
+              class="sidebar-link active"
+              data-tab="overview"
+              onclick="switchDashTab('overview')"
+            >
+              <span class="icon">📊</span> Dashboard</a
+            >
+            <a
+              class="sidebar-link"
+              data-tab="pendaftar"
+              onclick="switchDashTab('pendaftar')"
+            >
+              <span class="icon">📋</span> Pendaftar
+              <span class="badge-count">247</span></a
+            >
+            <a
+              class="sidebar-link"
+              data-tab="verifikasi"
+              onclick="switchDashTab('verifikasi')"
+              ><span class="icon">✅</span> Verifikasi
+              <span class="badge-count">38</span></a
+            >
+            <a
+              class="sidebar-link"
+              data-tab="seleksi"
+              onclick="switchDashTab('seleksi')"
+              ><span class="icon">🎯</span> Seleksi &amp; Penerimaan
+              <span class="badge-count">247</span></a
+            >
+            <a
+              class="sidebar-link"
+              data-tab="pengumuman"
+              onclick="switchDashTab('pengumuman')"
+              ><span class="icon">📢</span> Pengumuman</a
+            >
+          </div>
+          <div class="sidebar-section">
+            <div class="sidebar-label">Laporan</div>
+            <a
+              class="sidebar-link"
+              data-tab="laporan"
+              onclick="switchDashTab('laporan')"
+            >
+              <span class="icon">📈</span> Laporan &amp; Statistik</a
+            >
+            <a
+              class="sidebar-link"
+              data-tab="pengaturan"
+              onclick="switchDashTab('pengaturan')"
+              ><span class="icon">⚙️</span> Pengaturan</a
+            >
+          </div>
+
+          <div class="sidebar-user">
+            <div class="sidebar-avatar">SN</div>
+            <div class="sidebar-user-info">
+              <div class="name">Admin Sekolah</div>
+              <div class="role">SMP Negeri 22 Kota Pontianak</div>
+              <div
+                class="role"
+                style="font-size: 11px; color: var(--gray-500); margin-top: 4px"
+              >
+                Jln. Purnama Komplek Purnama Agung V
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+          <div class="main-header">
+            <div>
+              <div class="breadcrumb">
+                <a href="#">Dashboard</a> /
+                <span id="dash-breadcrumb-current">Overview</span>
+              </div>
+              <h2 id="dash-title">Dashboard</h2>
+            </div>
+            <div style="display: flex; gap: 8px">
+              <button class="btn btn-secondary btn-sm" onclick="exportData()">
+                📥 Ekspor Data
+              </button>
+              <button class="btn btn-primary btn-sm">+ Tambah Manual</button>
+            </div>
+          </div>
+
+          <!-- ── SECTION: OVERVIEW ── -->
+          <div class="dash-section active" data-section="overview">
+            <div class="stat-cards">
+              <div class="stat-card">
+                <div class="stat-card-icon">👥</div>
+                <div class="stat-card-label">Total Pendaftar</div>
+                <div class="stat-card-value">1,247</div>
+                <div class="stat-card-change up">↑ 12.5% dari kemarin</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-icon">✅</div>
+                <div class="stat-card-label">Terverifikasi</div>
+                <div class="stat-card-value">892</div>
+                <div class="stat-card-change up">71.5% dari total</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-icon">⏳</div>
+                <div class="stat-card-label">Menunggu Verifikasi</div>
+                <div class="stat-card-value">247</div>
+                <div class="stat-card-change down">Perlu ditindaklanjuti</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-icon">🎯</div>
+                <div class="stat-card-label">Kuota Terisi</div>
+                <div class="stat-card-value">68%</div>
+                <div class="stat-card-change up">216 / 320 siswa</div>
+              </div>
+            </div>
+
+            <div class="kuota-grid">
+              <div class="kuota-card">
+                <div class="kuota-card-header">
+                  <span class="kuota-card-label">📍 Zonasi</span
+                  ><span class="kuota-card-pct" style="color: var(--blue)"
+                    >78%</span
+                  >
+                </div>
+                <div class="kuota-bar-track">
+                  <div
+                    class="kuota-bar-fill"
+                    style="
+                      width: 78%;
+                      background: linear-gradient(
+                        90deg,
+                        var(--blue),
+                        var(--blue-bright)
+                      );
+                    "
+                  ></div>
+                </div>
+                <div class="kuota-card-sub">125 / 160 siswa</div>
+              </div>
+              <div class="kuota-card">
+                <div class="kuota-card-header">
+                  <span class="kuota-card-label">🏆 Prestasi</span
+                  ><span class="kuota-card-pct" style="color: var(--gold)"
+                    >62%</span
+                  >
+                </div>
+                <div class="kuota-bar-track">
+                  <div
+                    class="kuota-bar-fill"
+                    style="
+                      width: 62%;
+                      background: linear-gradient(
+                        90deg,
+                        var(--gold),
+                        var(--orange)
+                      );
+                    "
+                  ></div>
+                </div>
+                <div class="kuota-card-sub">60 / 96 siswa</div>
+              </div>
+              <div class="kuota-card">
+                <div class="kuota-card-header">
+                  <span class="kuota-card-label">🤝 Afirmasi</span
+                  ><span class="kuota-card-pct" style="color: var(--green)"
+                    >54%</span
+                  >
+                </div>
+                <div class="kuota-bar-track">
+                  <div
+                    class="kuota-bar-fill"
+                    style="
+                      width: 54%;
+                      background: linear-gradient(
+                        90deg,
+                        var(--green),
+                        var(--cyan)
+                      );
+                    "
+                  ></div>
+                </div>
+                <div class="kuota-card-sub">26 / 48 siswa</div>
+              </div>
+              <div class="kuota-card">
+                <div class="kuota-card-header">
+                  <span class="kuota-card-label">🔄 Pindah Tugas</span
+                  ><span class="kuota-card-pct" style="color: var(--purple)"
+                    >31%</span
+                  >
+                </div>
+                <div class="kuota-bar-track">
+                  <div
+                    class="kuota-bar-fill"
+                    style="
+                      width: 31%;
+                      background: linear-gradient(
+                        90deg,
+                        var(--purple),
+                        #a29bfe
+                      );
+                    "
+                  ></div>
+                </div>
+                <div class="kuota-card-sub">5 / 16 siswa</div>
+              </div>
+            </div>
+
+            <!-- Tabel Ringkas -->
+            <div class="data-panel">
+              <div class="data-panel-header">
+                <div class="data-panel-title">📋 Pendaftar Terbaru</div>
+                <button
+                  class="btn btn-secondary btn-sm"
+                  onclick="switchDashTab('pendaftar')"
+                >
+                  Lihat Semua →
+                </button>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Pendaftar</th>
+                    <th>NISN</th>
+                    <th>Asal SD/MI</th>
+                    <th>Jalur</th>
+                    <th>Status</th>
+                    <th>Tanggal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #2e86de,
+                              #54a0ff
+                            );
+                          "
+                        >
+                          RA
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Rizky Akbar Pratama</div>
+                          <div class="user-cell-sub">rizky.akbar@gmail.com</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0087654321</td>
+                    <td>SDN 1 Pontianak</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--blue);
+                        "
+                        >📍 Zonasi</span
+                      >
+                    </td>
+                    <td>
+                      <span class="status-badge verified"
+                        ><span class="status-dot"></span>Terverifikasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      12 Apr 2026
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #00b894,
+                              #00cec9
+                            );
+                          "
+                        >
+                          NF
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Nadia Fitria Sari</div>
+                          <div class="user-cell-sub">
+                            nadia.fitria@gmail.com
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0098765432</td>
+                    <td>SDN 3 Pontianak</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: #d4a017;
+                        "
+                        >🏆 Prestasi</span
+                      >
+                    </td>
+                    <td>
+                      <span class="status-badge verified"
+                        ><span class="status-dot"></span>Terverifikasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      12 Apr 2026
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #f6b93b,
+                              #e17055
+                            );
+                          "
+                        >
+                          BW
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Budi Wicaksono</div>
+                          <div class="user-cell-sub">budi.wicak@yahoo.com</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0076543210</td>
+                    <td>MIN 1 Pontianak</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--green);
+                        "
+                        >🤝 Afirmasi</span
+                      >
+                    </td>
+                    <td>
+                      <span class="status-badge pending"
+                        ><span class="status-dot"></span>Menunggu</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      11 Apr 2026
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /overview -->
+
+          <!-- ── SECTION: PENDAFTAR ── -->
+          <div class="dash-section" data-section="pendaftar">
+            <div class="data-panel">
+              <div class="data-panel-header">
+                <div class="data-panel-title">📋 Semua Pendaftar</div>
+                <div class="data-panel-actions">
+                  <div class="search-box">
+                    <span class="icon">🔍</span>
+                    <input
+                      id="search-pendaftar"
+                      placeholder="Cari nama, NISN, sekolah..."
+                      oninput="filterTable(this, 'tabel-pendaftar')"
+                    />
+                  </div>
+                  <select
+                    class="form-input"
+                    style="
+                      width: auto;
+                      padding: 7px 28px 7px 10px;
+                      font-size: 12px;
+                    "
+                  >
+                    <option>Semua Jalur</option>
+                    <option>Zonasi</option>
+                    <option>Prestasi</option>
+                    <option>Afirmasi</option>
+                    <option>Pindah Tugas</option>
+                  </select>
+                  <select
+                    class="form-input"
+                    style="
+                      width: auto;
+                      padding: 7px 28px 7px 10px;
+                      font-size: 12px;
+                    "
+                  >
+                    <option>Semua Status</option>
+                    <option>Terverifikasi</option>
+                    <option>Menunggu</option>
+                    <option>Revisi Dokumen</option>
+                  </select>
+                </div>
+              </div>
+              <table id="tabel-pendaftar">
+                <thead>
+                  <tr>
+                    <th>Pendaftar</th>
+                    <th>NISN</th>
+                    <th>Asal SD/MI</th>
+                    <th>Jalur</th>
+                    <th>Sekolah Tujuan</th>
+                    <th>Status</th>
+                    <th>Tanggal</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #2e86de,
+                              #54a0ff
+                            );
+                          "
+                        >
+                          RA
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Rizky Akbar Pratama</div>
+                          <div class="user-cell-sub">0087654321</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0087654321</td>
+                    <td>SDN 1 Pontianak</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--blue);
+                        "
+                        >📍 Zonasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">SMPN 22 Pontianak</td>
+                    <td>
+                      <span class="status-badge verified"
+                        ><span class="status-dot"></span>Terverifikasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      12 Apr
+                    </td>
+                    <td>
+                      <button class="btn btn-secondary btn-xs">Detail</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #00b894,
+                              #00cec9
+                            );
+                          "
+                        >
+                          NF
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Nadia Fitria Sari</div>
+                          <div class="user-cell-sub">0098765432</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0098765432</td>
+                    <td>SDN 3 Pontianak</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: #d4a017;
+                        "
+                        >🏆 Prestasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">SMPN 22 Pontianak</td>
+                    <td>
+                      <span class="status-badge verified"
+                        ><span class="status-dot"></span>Terverifikasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      12 Apr
+                    </td>
+                    <td>
+                      <button class="btn btn-secondary btn-xs">Detail</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #f6b93b,
+                              #e17055
+                            );
+                          "
+                        >
+                          BW
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Budi Wicaksono</div>
+                          <div class="user-cell-sub">0076543210</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0076543210</td>
+                    <td>MIN 1 Pontianak</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--green);
+                        "
+                        >🤝 Afirmasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">SMPN 22 Pontianak</td>
+                    <td>
+                      <span class="status-badge pending"
+                        ><span class="status-dot"></span>Menunggu</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      11 Apr
+                    </td>
+                    <td>
+                      <button class="btn btn-secondary btn-xs">Detail</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #6c5ce7,
+                              #a29bfe
+                            );
+                          "
+                        >
+                          DA
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Dewi Anggraini</div>
+                          <div class="user-cell-sub">0065432109</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0065432109</td>
+                    <td>SDN 5 Pontianak</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--blue);
+                        "
+                        >📍 Zonasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">SMPN 22 Pontianak</td>
+                    <td>
+                      <span class="status-badge pending"
+                        ><span class="status-dot"></span>Menunggu</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      11 Apr
+                    </td>
+                    <td>
+                      <button class="btn btn-secondary btn-xs">Detail</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #e74c3c,
+                              #fd79a8
+                            );
+                          "
+                        >
+                          MR
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Muhammad Rafli</div>
+                          <div class="user-cell-sub">0054321098</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0054321098</td>
+                    <td>SDN 8 Pontianak</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--blue);
+                        "
+                        >📍 Zonasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">SMPN 22 Pontianak</td>
+                    <td>
+                      <span class="status-badge rejected"
+                        ><span class="status-dot"></span>Revisi Dokumen</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      10 Apr
+                    </td>
+                    <td>
+                      <button class="btn btn-secondary btn-xs">Detail</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #0984e3,
+                              #74b9ff
+                            );
+                          "
+                        >
+                          SR
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Sari Rahmawati</div>
+                          <div class="user-cell-sub">0043210987</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>0043210987</td>
+                    <td>MI Nurul Islam</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--green);
+                        "
+                        >🤝 Afirmasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">SMPN 22 Pontianak</td>
+                    <td>
+                      <span class="status-badge verified"
+                        ><span class="status-dot"></span>Terverifikasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      10 Apr
+                    </td>
+                    <td>
+                      <button class="btn btn-secondary btn-xs">Detail</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="table-footer">
+                <span class="table-footer-info"
+                  >Menampilkan 1–6 dari 247 pendaftar</span
+                >
+                <div class="pagination">
+                  <button class="btn btn-secondary btn-sm">←</button>
+                  <button
+                    class="btn btn-sm"
+                    style="background: var(--blue); color: #fff"
+                  >
+                    1
+                  </button>
+                  <button class="btn btn-secondary btn-sm">2</button>
+                  <button class="btn btn-secondary btn-sm">3</button>
+                  <button class="btn btn-secondary btn-sm">→</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /pendaftar -->
+
+          <!-- ── SECTION: VERIFIKASI ── -->
+          <div class="dash-section" data-section="verifikasi">
+            <div class="data-panel">
+              <div class="data-panel-header">
+                <div class="data-panel-title">
+                  ✅ Antrian Verifikasi Dokumen
+                </div>
+                <div class="data-panel-actions">
+                  <span style="font-size: 13px; color: var(--gray-500)"
+                    >38 dokumen menunggu</span
+                  >
+                </div>
+              </div>
+              <table id="tabel-verifikasi">
+                <thead>
+                  <tr>
+                    <th>Pendaftar</th>
+                    <th>Jalur</th>
+                    <th>Dokumen</th>
+                    <th>Diunggah</th>
+                    <th>Catatan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #f6b93b,
+                              #e17055
+                            );
+                          "
+                        >
+                          BW
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Budi Wicaksono</div>
+                          <div class="user-cell-sub">MIN 1 Pontianak</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--green);
+                        "
+                        >🤝 Afirmasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">KK, Akta, SKTM</td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      11 Apr 2026
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Tulis catatan..."
+                        style="
+                          font-size: 12px;
+                          padding: 6px 10px;
+                          min-width: 160px;
+                        "
+                      />
+                    </td>
+                    <td>
+                      <div class="verify-actions">
+                        <button
+                          class="btn btn-success btn-xs"
+                          onclick="approveRow(this)"
+                        >
+                          ✓ Setujui</button
+                        ><button
+                          class="btn btn-danger btn-xs"
+                          onclick="rejectRow(this)"
+                        >
+                          ✗ Tolak
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #6c5ce7,
+                              #a29bfe
+                            );
+                          "
+                        >
+                          DA
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Dewi Anggraini</div>
+                          <div class="user-cell-sub">SDN 5 Pontianak</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--blue);
+                        "
+                        >📍 Zonasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">Ijazah, KK, Foto</td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      11 Apr 2026
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Tulis catatan..."
+                        style="
+                          font-size: 12px;
+                          padding: 6px 10px;
+                          min-width: 160px;
+                        "
+                      />
+                    </td>
+                    <td>
+                      <div class="verify-actions">
+                        <button
+                          class="btn btn-success btn-xs"
+                          onclick="approveRow(this)"
+                        >
+                          ✓ Setujui</button
+                        ><button
+                          class="btn btn-danger btn-xs"
+                          onclick="rejectRow(this)"
+                        >
+                          ✗ Tolak
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #00b894,
+                              #74b9ff
+                            );
+                          "
+                        >
+                          AP
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Andi Prasetyo</div>
+                          <div class="user-cell-sub">SDN 12 Pontianak</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: #d4a017;
+                        "
+                        >🏆 Prestasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">Rapor, Piagam, KK</td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      10 Apr 2026
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Tulis catatan..."
+                        style="
+                          font-size: 12px;
+                          padding: 6px 10px;
+                          min-width: 160px;
+                        "
+                      />
+                    </td>
+                    <td>
+                      <div class="verify-actions">
+                        <button
+                          class="btn btn-success btn-xs"
+                          onclick="approveRow(this)"
+                        >
+                          ✓ Setujui</button
+                        ><button
+                          class="btn btn-danger btn-xs"
+                          onclick="rejectRow(this)"
+                        >
+                          ✗ Tolak
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="table-footer">
+                <span class="table-footer-info"
+                  >Menampilkan 1–3 dari 38 antrian</span
+                >
+                <div class="pagination">
+                  <button class="btn btn-secondary btn-sm">←</button>
+                  <button
+                    class="btn btn-sm"
+                    style="background: var(--blue); color: #fff"
+                  >
+                    1
+                  </button>
+                  <button class="btn btn-secondary btn-sm">2</button>
+                  <button class="btn btn-secondary btn-sm">→</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /verifikasi -->
+
+          <!-- ── SECTION: SELEKSI & PENERIMAAN ── -->
+          <div class="dash-section" data-section="seleksi">
+            <div class="data-panel">
+              <div class="data-panel-header">
+                <div class="data-panel-title">
+                  🎯 Seleksi &amp; Keputusan Penerimaan
+                </div>
+                <div class="data-panel-actions">
+                  <span style="font-size: 13px; color: var(--gray-500)"
+                    >247 siswa terverifikasi</span
+                  >
+                </div>
+              </div>
+
+              <!-- Filter & Stats -->
+              <div
+                style="
+                  background: var(--gray-50);
+                  border-radius: var(--radius-md);
+                  padding: 16px;
+                  margin-bottom: 20px;
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                  gap: 12px;
+                "
+              >
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--gray-500);
+                      text-transform: uppercase;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Status
+                  </div>
+                  <div
+                    style="
+                      font-weight: 600;
+                      color: var(--navy);
+                      font-size: 18px;
+                    "
+                  >
+                    0
+                  </div>
+                  <div style="font-size: 12px; color: var(--gray-500)">
+                    Sudah Diputus
+                  </div>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--gray-500);
+                      text-transform: uppercase;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Diterima
+                  </div>
+                  <div
+                    style="
+                      font-weight: 600;
+                      color: var(--green);
+                      font-size: 18px;
+                    "
+                  >
+                    0
+                  </div>
+                  <div style="font-size: 12px; color: var(--gray-500)">
+                    Siswa Diterima
+                  </div>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--gray-500);
+                      text-transform: uppercase;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Ditolak
+                  </div>
+                  <div
+                    style="font-weight: 600; color: var(--red); font-size: 18px"
+                  >
+                    0
+                  </div>
+                  <div style="font-size: 12px; color: var(--gray-500)">
+                    Siswa Ditolak
+                  </div>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--gray-500);
+                      text-transform: uppercase;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Menunggu
+                  </div>
+                  <div
+                    style="
+                      font-weight: 600;
+                      color: var(--orange);
+                      font-size: 18px;
+                    "
+                  >
+                    247
+                  </div>
+                  <div style="font-size: 12px; color: var(--gray-500)">
+                    Menunggu Keputusan
+                  </div>
+                </div>
+              </div>
+
+              <table id="tabel-seleksi">
+                <thead>
+                  <tr>
+                    <th>Pendaftar</th>
+                    <th>Jalur</th>
+                    <th>Skor</th>
+                    <th>Peringkat</th>
+                    <th>Status Keputusan</th>
+                    <th>Catatan Penolakan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background: var(--green-light)">
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #2e86de,
+                              #54a0ff
+                            );
+                          "
+                        >
+                          RA
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Rizky Akbar Pratama</div>
+                          <div class="user-cell-sub">0087654321</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--blue);
+                        "
+                        >📍 Zonasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">88.40</td>
+                    <td style="font-size: 12px">#12 / 160</td>
+                    <td>
+                      <span class="status-badge verified"
+                        ><span class="status-dot"></span>DITERIMA</span
+                      >
+                    </td>
+                    <td style="color: var(--gray-400)">—</td>
+                    <td>
+                      <div style="display: flex; gap: 4px">
+                        <button
+                          class="btn btn-secondary btn-xs"
+                          onclick="undoDecision(this)"
+                        >
+                          ↶ Batal
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #00b894,
+                              #00cec9
+                            );
+                          "
+                        >
+                          NF
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Nadia Fitria Sari</div>
+                          <div class="user-cell-sub">0098765432</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: #d4a017;
+                        "
+                        >🏆 Prestasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">92.15</td>
+                    <td style="font-size: 12px">#5 / 96</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          padding: 4px 8px;
+                          background: var(--gray-100);
+                          border-radius: 4px;
+                          color: var(--gray-500);
+                        "
+                        >Menunggu</span
+                      >
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Alasan..."
+                        style="
+                          font-size: 12px;
+                          padding: 6px 10px;
+                          max-width: 140px;
+                        "
+                        disabled
+                      />
+                    </td>
+                    <td>
+                      <div class="verify-actions">
+                        <button
+                          class="btn btn-success btn-xs"
+                          onclick="approveSelection(this)"
+                        >
+                          ✓ Terima</button
+                        ><button
+                          class="btn btn-danger btn-xs"
+                          onclick="rejectSelection(this)"
+                        >
+                          ✗ Tolak
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #f6b93b,
+                              #e17055
+                            );
+                          "
+                        >
+                          BW
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Budi Wicaksono</div>
+                          <div class="user-cell-sub">0076543210</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--green);
+                        "
+                        >🤝 Afirmasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">81.20</td>
+                    <td style="font-size: 12px">#8 / 48</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          padding: 4px 8px;
+                          background: var(--gray-100);
+                          border-radius: 4px;
+                          color: var(--gray-500);
+                        "
+                        >Menunggu</span
+                      >
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Alasan..."
+                        style="
+                          font-size: 12px;
+                          padding: 6px 10px;
+                          max-width: 140px;
+                        "
+                        disabled
+                      />
+                    </td>
+                    <td>
+                      <div class="verify-actions">
+                        <button
+                          class="btn btn-success btn-xs"
+                          onclick="approveSelection(this)"
+                        >
+                          ✓ Terima</button
+                        ><button
+                          class="btn btn-danger btn-xs"
+                          onclick="rejectSelection(this)"
+                        >
+                          ✗ Tolak
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #6c5ce7,
+                              #a29bfe
+                            );
+                          "
+                        >
+                          DA
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Dewi Anggraini</div>
+                          <div class="user-cell-sub">0065432109</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--blue);
+                        "
+                        >📍 Zonasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">85.30</td>
+                    <td style="font-size: 12px">#28 / 160</td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          padding: 4px 8px;
+                          background: var(--gray-100);
+                          border-radius: 4px;
+                          color: var(--gray-500);
+                        "
+                        >Menunggu</span
+                      >
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Alasan..."
+                        style="
+                          font-size: 12px;
+                          padding: 6px 10px;
+                          max-width: 140px;
+                        "
+                        disabled
+                      />
+                    </td>
+                    <td>
+                      <div class="verify-actions">
+                        <button
+                          class="btn btn-success btn-xs"
+                          onclick="approveSelection(this)"
+                        >
+                          ✓ Terima</button
+                        ><button
+                          class="btn btn-danger btn-xs"
+                          onclick="rejectSelection(this)"
+                        >
+                          ✗ Tolak
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr style="background: var(--red-light)">
+                    <td>
+                      <div class="user-cell">
+                        <div
+                          class="user-cell-avatar"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #e74c3c,
+                              #fd79a8
+                            );
+                          "
+                        >
+                          MR
+                        </div>
+                        <div>
+                          <div class="user-cell-name">Muhammad Rafli</div>
+                          <div class="user-cell-sub">0054321098</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          color: var(--blue);
+                        "
+                        >📍 Zonasi</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">76.80</td>
+                    <td style="font-size: 12px">#165 / 160</td>
+                    <td>
+                      <span class="status-badge rejected"
+                        ><span class="status-dot"></span>DITOLAK</span
+                      >
+                    </td>
+                    <td style="font-size: 12px">Peringkat melebihi kuota</td>
+                    <td>
+                      <div style="display: flex; gap: 4px">
+                        <button
+                          class="btn btn-secondary btn-xs"
+                          onclick="undoDecision(this)"
+                        >
+                          ↶ Batal
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="table-footer">
+                <span class="table-footer-info"
+                  >Menampilkan 1–4 dari 247 pendaftar</span
+                >
+                <div class="pagination">
+                  <button class="btn btn-secondary btn-sm">←</button>
+                  <button
+                    class="btn btn-sm"
+                    style="background: var(--blue); color: #fff"
+                  >
+                    1
+                  </button>
+                  <button class="btn btn-secondary btn-sm">2</button>
+                  <button class="btn btn-secondary btn-sm">3</button>
+                  <button class="btn btn-secondary btn-sm">→</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Panel -->
+            <div
+              style="
+                background: var(--blue-bright);
+                color: #fff;
+                border-radius: var(--radius-lg);
+                padding: 16px;
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <div>
+                <strong>Selesai membuat keputusan penerimaan?</strong>
+                <p style="font-size: 13px; margin-top: 4px; opacity: 0.9">
+                  Publikasikan hasil seleksi agar peserta dapat melihat status
+                  penerimaan mereka
+                </p>
+              </div>
+              <button
+                class="btn btn-white"
+                style="white-space: nowrap"
+                onclick="switchDashTab('pengumuman')"
+              >
+                📢 Publikasikan Hasil →
+              </button>
+            </div>
+          </div>
+          <!-- /seleksi -->
+
+          <!-- ── SECTION: PENGUMUMAN ── -->
+          <div class="dash-section" data-section="pengumuman">
+            <div class="announce-compose">
+              <h4>📢 Buat &amp; Publikasi Pengumuman</h4>
+              <label class="form-label">Jenis Pengumuman</label>
+              <div class="announce-type-grid">
+                <div
+                  class="announce-type active"
+                  onclick="selectAnnounceType(this)"
+                >
+                  <div class="announce-type-icon">🎉</div>
+                  <div class="announce-type-label">Hasil Seleksi</div>
+                </div>
+                <div class="announce-type" onclick="selectAnnounceType(this)">
+                  <div class="announce-type-icon">📝</div>
+                  <div class="announce-type-label">Pengumuman Info</div>
+                </div>
+                <div class="announce-type" onclick="selectAnnounceType(this)">
+                  <div class="announce-type-icon">⚠️</div>
+                  <div class="announce-type-label">Peringatan / Revisi</div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Judul Pengumuman</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    value="Pengumuman Hasil Seleksi PPDB SMP Negeri 22 TA 2026/2027"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tanggal Publikasi</label>
+                  <input
+                    type="datetime-local"
+                    class="form-input"
+                    value="2026-06-15T08:00"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Isi Pengumuman</label>
+                <textarea class="form-input" style="min-height: 100px">
+Berdasarkan hasil seleksi PPDB SMP Negeri 22 Tahun Ajaran 2026/2027, kami mengumumkan nama-nama peserta yang DITERIMA. Peserta yang diterima wajib melakukan daftar ulang pada 16–20 Juni 2026 dengan membawa dokumen asli.</textarea
+                >
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="notify-email" checked />
+                <label for="notify-email"
+                  >Kirim notifikasi Email ke semua peserta (1.247
+                  penerima)</label
+                >
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="notify-wa" checked />
+                <label for="notify-wa"
+                  >Kirim notifikasi WhatsApp ke semua peserta</label
+                >
+              </div>
+              <div style="display: flex; gap: 10px; margin-top: 8px">
+                <button class="btn btn-secondary">Simpan Draft</button>
+                <button class="btn btn-primary" onclick="publishAnnouncement()">
+                  📢 Publikasikan Sekarang
+                </button>
+              </div>
+            </div>
+
+            <div class="data-panel">
+              <div class="data-panel-header">
+                <div class="data-panel-title">📋 Riwayat Pengumuman</div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Judul</th>
+                    <th>Jenis</th>
+                    <th>Dipublikasi</th>
+                    <th>Penerima</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight: 600; color: var(--navy)">
+                      Pembukaan Pendaftaran PPDB SMPN 22 Pontianak 2026
+                    </td>
+                    <td>
+                      <span class="status-badge new"
+                        ><span class="status-dot"></span>Info</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      1 Apr 2026, 08:00
+                    </td>
+                    <td style="font-size: 12px">12,500 penerima</td>
+                    <td>
+                      <span class="status-badge verified"
+                        ><span class="status-dot"></span>Terkirim</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 600; color: var(--navy)">
+                      Perpanjangan Batas Upload Dokumen
+                    </td>
+                    <td>
+                      <span class="status-badge pending"
+                        ><span class="status-dot"></span>Peringatan</span
+                      >
+                    </td>
+                    <td style="font-size: 12px; color: var(--gray-400)">
+                      5 Apr 2026, 14:00
+                    </td>
+                    <td style="font-size: 12px">1,247 penerima</td>
+                    <td>
+                      <span class="status-badge verified"
+                        ><span class="status-dot"></span>Terkirim</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /pengumuman -->
+
+          <!-- ── SECTION: LAPORAN ── -->
+          <div class="dash-section" data-section="laporan">
+            <div class="stat-cards">
+              <div class="stat-card">
+                <div class="stat-card-icon">📊</div>
+                <div class="stat-card-label">Total Pendaftar</div>
+                <div class="stat-card-value">1,247</div>
+                <div class="stat-card-change up">↑ vs tahun lalu</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-icon">🎯</div>
+                <div class="stat-card-label">Tingkat Penerimaan</div>
+                <div class="stat-card-value">25.6%</div>
+                <div class="stat-card-change up">320 diterima</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-icon">⚡</div>
+                <div class="stat-card-label">Avg. Proses Verifikasi</div>
+                <div class="stat-card-value">1.8 hari</div>
+                <div class="stat-card-change up">↓ Lebih cepat</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-icon">📱</div>
+                <div class="stat-card-label">Daftar via Mobile</div>
+                <div class="stat-card-value">67%</div>
+                <div class="stat-card-change up">↑ dari 52%</div>
+              </div>
+            </div>
+            <div class="data-panel">
+              <div class="data-panel-header">
+                <div class="data-panel-title">
+                  📊 Distribusi Pendaftar per Jalur
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="exportData()">
+                  📥 Unduh Laporan
+                </button>
+              </div>
+              <div style="padding: 24px">
+                <div style="display: flex; flex-direction: column; gap: 14px">
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 6px;
+                        font-size: 13px;
+                      "
+                    >
+                      <span style="font-weight: 600; color: var(--navy)"
+                        >📍 Zonasi</span
+                      ><span style="color: var(--blue); font-weight: 700"
+                        >624 pendaftar (50%)</span
+                      >
+                    </div>
+                    <div class="kuota-bar-track" style="height: 10px">
+                      <div
+                        class="kuota-bar-fill"
+                        style="
+                          width: 50%;
+                          background: linear-gradient(
+                            90deg,
+                            var(--blue),
+                            var(--blue-bright)
+                          );
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 6px;
+                        font-size: 13px;
+                      "
+                    >
+                      <span style="font-weight: 600; color: var(--navy)"
+                        >🏆 Prestasi</span
+                      ><span style="color: var(--gold); font-weight: 700"
+                        >374 pendaftar (30%)</span
+                      >
+                    </div>
+                    <div class="kuota-bar-track" style="height: 10px">
+                      <div
+                        class="kuota-bar-fill"
+                        style="
+                          width: 30%;
+                          background: linear-gradient(
+                            90deg,
+                            var(--gold),
+                            var(--orange)
+                          );
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 6px;
+                        font-size: 13px;
+                      "
+                    >
+                      <span style="font-weight: 600; color: var(--navy)"
+                        >🤝 Afirmasi</span
+                      ><span style="color: var(--green); font-weight: 700"
+                        >187 pendaftar (15%)</span
+                      >
+                    </div>
+                    <div class="kuota-bar-track" style="height: 10px">
+                      <div
+                        class="kuota-bar-fill"
+                        style="
+                          width: 15%;
+                          background: linear-gradient(
+                            90deg,
+                            var(--green),
+                            var(--cyan)
+                          );
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 6px;
+                        font-size: 13px;
+                      "
+                    >
+                      <span style="font-weight: 600; color: var(--navy)"
+                        >🔄 Pindah Tugas</span
+                      ><span style="color: var(--purple); font-weight: 700"
+                        >62 pendaftar (5%)</span
+                      >
+                    </div>
+                    <div class="kuota-bar-track" style="height: 10px">
+                      <div
+                        class="kuota-bar-fill"
+                        style="
+                          width: 5%;
+                          background: linear-gradient(
+                            90deg,
+                            var(--purple),
+                            #a29bfe
+                          );
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /laporan -->
+
+          <!-- ── SECTION: PENGATURAN ── -->
+          <div class="dash-section" data-section="pengaturan">
+            <div class="form-card">
+              <div class="form-card-title">⚙️ Pengaturan Sistem PPDB</div>
+              <div class="form-card-desc">
+                Konfigurasi parameter sistem pendaftaran
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Batas Waktu Pendaftaran</label>
+                  <input
+                    type="datetime-local"
+                    class="form-input"
+                    value="2026-06-07T23:59"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Batas Waktu Verifikasi</label>
+                  <input
+                    type="datetime-local"
+                    class="form-input"
+                    value="2026-06-12T23:59"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Total Kuota Sekolah</label>
+                  <input type="number" class="form-input" value="320" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tahun Ajaran</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    value="2026/2027"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="set-open" checked />
+                <label for="set-open">Pendaftaran sedang DIBUKA</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="set-notif" checked />
+                <label for="set-notif"
+                  >Aktifkan notifikasi otomatis email &amp; WhatsApp</label
+                >
+              </div>
+              <button
+                class="btn btn-primary"
+                onclick="showToast('Pengaturan berhasil disimpan', 'success')"
+              >
+                💾 Simpan Pengaturan
+              </button>
+            </div>
+          </div>
+          <!-- /pengaturan -->
+        </main>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

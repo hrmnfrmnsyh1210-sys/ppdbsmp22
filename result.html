@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengumuman Hasil Seleksi – PPDB SMP Negeri 22 Kota Pontianak</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ══ TOAST CONTAINER ════════════════════════════════════ -->
+    <div id="toast-container"></div>
+
+    <!-- ══ MODAL ═════════════════════════════════════════════ -->
+    <div id="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-icon" id="modal-icon">?</div>
+          <div class="modal-title" id="modal-title">Konfirmasi</div>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="modal-cancel" onclick="closeModal()">Batal</button>
+          <button class="btn btn-primary btn-lg" id="modal-confirm" onclick="confirmModal()">Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ NAVIGASI HALAMAN (Demo Switcher) ══════════════════════════ -->
+    <div class="page-tabs">
+      <a class="page-tab" href="index.html">🏠 Beranda</a>
+      <a class="page-tab" href="login.html">🔑 Login</a>
+      <a class="page-tab" href="register.html">📝 Pendaftaran</a>
+      <a class="page-tab" href="dashboard.html">📊 Dashboard Admin</a>
+      <a class="page-tab active" href="result.html">🎉 Pengumuman</a>
+    </div>
+
+      <nav class="nav">
+        <div class="nav-inner">
+          <a href="#" class="nav-logo" onclick="showPage('landing')">
+            <div class="nav-logo-icon">22</div>
+            <span class="nav-logo-text">PPDB Online</span>
+          </a>
+          <div class="nav-links">
+            <a href="#" onclick="showPage('landing')">Beranda</a>
+            <a href="#" class="active">Pengumuman</a>
+          </div>
+          <div class="nav-actions">
+            <button class="btn btn-ghost" onclick="showPage('login')">
+              Masuk
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="result-page">
+        <div class="result-container">
+          <div style="text-align: center; margin-bottom: 28px">
+            <h2
+              style="
+                font-family: var(--font-display);
+                font-size: 26px;
+                color: var(--navy);
+                margin-bottom: 6px;
+              "
+            >
+              Hasil Seleksi PPDB SMP Negeri 22
+            </h2>
+            <p style="font-size: 14px; color: var(--gray-500)">
+              Tahun Ajaran 2026/2027 · Diumumkan 15 Juni 2026
+            </p>
+          </div>
+
+          <!-- Form Cek -->
+          <div
+            style="
+              background: var(--white-pure);
+              border-radius: var(--radius-lg);
+              border: 1px solid var(--gray-100);
+              padding: 24px;
+              margin-bottom: 20px;
+            "
+          >
+            <label
+              class="form-label"
+              style="font-size: 14px; margin-bottom: 10px"
+              >🔍 Cek Hasil Seleksi</label
+            >
+            <p
+              style="
+                font-size: 13px;
+                color: var(--gray-500);
+                margin-bottom: 14px;
+              "
+            >
+              Masukkan Nomor Pendaftaran atau NISN untuk melihat hasil seleksi
+              Anda
+            </p>
+            <div style="display: flex; gap: 8px">
+              <input
+                id="input-no-pendaftaran"
+                type="text"
+                class="form-input"
+                placeholder="Contoh: PPDB-2026-00847 atau NISN"
+                value="PPDB-2026-00847"
+              />
+              <button
+                class="btn btn-primary btn-lg"
+                onclick="cekHasil()"
+                style="white-space: nowrap"
+              >
+                Cari Hasil
+              </button>
+            </div>
+          </div>
+
+          <!-- Loading State -->
+          <div class="result-loading" id="result-loading">
+            <div class="big-spinner"></div>
+            <p style="font-size: 14px; color: var(--gray-500)">
+              Sedang mencari data…
+            </p>
+          </div>
+
+          <!-- Result Card -->
+          <div class="result-card show" id="result-card">
+            <div class="result-card-top">
+              <div class="result-icon">🎉</div>
+              <div class="result-status">DITERIMA</div>
+              <div class="result-school">SMP Negeri 22 Kota Pontianak</div>
+              <div class="result-jalur">Jalur Zonasi · Pilihan ke-1</div>
+            </div>
+            <div class="result-details">
+              <div class="result-detail-row">
+                <span class="result-detail-label">Nama Lengkap</span
+                ><span class="result-detail-value">Rizky Akbar Pratama</span>
+              </div>
+              <div class="result-detail-row">
+                <span class="result-detail-label">NISN</span
+                ><span class="result-detail-value">0087654321</span>
+              </div>
+              <div class="result-detail-row">
+                <span class="result-detail-label">Asal SD/MI</span
+                ><span class="result-detail-value"
+                  >SDN 1 Pontianak (Lulus 2026)</span
+                >
+              </div>
+              <div class="result-detail-row">
+                <span class="result-detail-label">Nilai Rata-rata Rapor</span
+                ><span class="result-detail-value" style="color: var(--green)"
+                  >88.40</span
+                >
+              </div>
+              <div class="result-detail-row">
+                <span class="result-detail-label">Peringkat Zonasi</span
+                ><span class="result-detail-value"
+                  >#12 dari 160 siswa diterima</span
+                >
+              </div>
+              <div class="result-detail-row">
+                <span class="result-detail-label"
+                  >Jarak Domisili ke Sekolah</span
+                ><span class="result-detail-value">1.2 km</span>
+              </div>
+              <div class="result-detail-row">
+                <span class="result-detail-label">No. Pendaftaran</span
+                ><span class="result-detail-value">PPDB-2026-00847</span>
+              </div>
+              <div class="result-detail-row">
+                <span class="result-detail-label">Batas Daftar Ulang</span
+                ><span class="result-detail-value" style="color: var(--red)"
+                  >⏰ 20 Juni 2026</span
+                >
+              </div>
+            </div>
+            <div class="result-actions">
+              <button
+                class="btn btn-primary btn-lg"
+                style="flex: 1"
+                onclick="cetakSurat()"
+              >
+                📄 Cetak Surat Penerimaan
+              </button>
+              <button
+                class="btn btn-success btn-lg"
+                style="flex: 1"
+                onclick="
+                  showToast(
+                    'Proses daftar ulang dibuka. Harap datang ke sekolah dengan dokumen asli.',
+                    'info',
+                    5000,
+                  )
+                "
+              >
+                ✅ Konfirmasi Daftar Ulang
+              </button>
+            </div>
+          </div>
+          <!-- /result-card -->
+
+          <div class="info-box">
+            <span class="info-box-icon">ℹ️</span>
+            <div class="info-box-text">
+              <strong style="color: var(--navy)">Penting:</strong>
+              Segera lakukan daftar ulang sebelum <strong>20 Juni 2026</strong>.
+              Bawa seluruh dokumen asli untuk verifikasi ke sekolah tujuan.
+              Hubungi helpdesk PPDB di 📞 (0561) 123-4567 atau 💬 WhatsApp jika
+              ada pertanyaan.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

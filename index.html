@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beranda – PPDB SMP Negeri 22 Kota Pontianak</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ══ TOAST CONTAINER ════════════════════════════════════ -->
+    <div id="toast-container"></div>
+
+    <!-- ══ MODAL ═════════════════════════════════════════════ -->
+    <div id="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-icon" id="modal-icon">?</div>
+          <div class="modal-title" id="modal-title">Konfirmasi</div>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="modal-cancel" onclick="closeModal()">Batal</button>
+          <button class="btn btn-primary btn-lg" id="modal-confirm" onclick="confirmModal()">Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ NAVIGASI HALAMAN (Demo Switcher) ══════════════════════════ -->
+    <div class="page-tabs">
+      <a class="page-tab active" href="index.html">🏠 Beranda</a>
+      <a class="page-tab" href="login.html">🔑 Login</a>
+      <a class="page-tab" href="register.html">📝 Pendaftaran</a>
+      <a class="page-tab" href="dashboard.html">📊 Dashboard Admin</a>
+      <a class="page-tab" href="result.html">🎉 Pengumuman</a>
+    </div>
+
+      <!-- Announcement Bar -->
+      <div class="announcement-bar" id="announcement-bar">
+        <span
+          >🔔 Pendaftaran PPDB SMP TA 2026/2027 dibuka! Batas
+          waktu:&nbsp;<strong>1 Juni 2026</strong></span
+        >
+        <span class="countdown" id="countdown-timer">…</span>
+        <button class="close-bar" onclick="closeAnnouncement()">×</button>
+      </div>
+
+      <!-- Nav -->
+      <nav class="nav">
+        <div class="nav-inner">
+          <a href="#" class="nav-logo">
+            <div class="nav-logo-icon">22</div>
+            <span class="nav-logo-text">PPDB Online</span>
+          </a>
+          <div class="nav-links">
+            <a href="#beranda" class="active">Beranda</a>
+            <a href="#jalur">Jalur Masuk</a>
+            <a href="#jadwal">Jadwal</a>
+            <a href="#persyaratan">Persyaratan</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div class="nav-actions">
+            <button class="btn btn-ghost" onclick="window.location.href='login.html'">
+              Masuk
+            </button>
+            <button class="btn btn-primary" onclick="window.location.href='register.html'">
+              Daftar Sekarang
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero -->
+      <section class="hero" id="beranda">
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+          <div class="animate-in">
+            <div class="hero-badge">Pendaftaran Dibuka · TA 2026/2027</div>
+            <h1>Penerimaan <span>Peserta Didik</span> Baru SMP Negeri 22</h1>
+            <p class="hero-desc">
+              Daftar secara online dengan mudah, cepat, dan transparan. Sistem
+              PPDB digital yang mendukung empat jalur masuk sesuai regulasi
+              Kemendikbud untuk lulusan SD/MI.
+            </p>
+            <div class="hero-btns">
+              <button
+                class="btn btn-white btn-lg"
+                onclick="showPage('register')"
+              >
+                📝 Mulai Mendaftar
+              </button>
+              <button
+                class="btn btn-outline btn-lg"
+                onclick="showPage('result')"
+              >
+                🔍 Cek Pengumuman
+              </button>
+            </div>
+            <div class="hero-stats">
+              <div>
+                <div class="hero-stat-num" data-counter="8340">0</div>
+                <div class="hero-stat-label">Total Pendaftar</div>
+              </div>
+              <div>
+                <div class="hero-stat-num" data-counter="32">0</div>
+                <div class="hero-stat-label">Sekolah Tujuan</div>
+              </div>
+              <div>
+                <div class="hero-stat-num" data-counter="6400">0</div>
+                <div class="hero-stat-label">Kuota Tersedia</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview Card -->
+          <div class="animate-in delay-2">
+            <div class="hero-card">
+              <div class="hero-card-header">
+                <span class="hero-card-title">📊 Statistik Real-time</span>
+                <span class="hero-card-badge">🔴 Live</span>
+              </div>
+              <div class="hero-chart">
+                <div class="hero-bar" style="height: 45%"></div>
+                <div class="hero-bar" style="height: 65%"></div>
+                <div class="hero-bar" style="height: 50%"></div>
+                <div class="hero-bar" style="height: 80%"></div>
+                <div class="hero-bar" style="height: 70%"></div>
+                <div class="hero-bar" style="height: 90%"></div>
+                <div class="hero-bar" style="height: 75%"></div>
+                <div class="hero-bar" style="height: 60%"></div>
+                <div class="hero-bar" style="height: 95%"></div>
+                <div class="hero-bar" style="height: 85%"></div>
+              </div>
+              <div class="hero-mini-stats">
+                <div class="hero-mini-stat">
+                  <div class="num">4.2 rb</div>
+                  <div class="lbl">Zonasi</div>
+                </div>
+                <div class="hero-mini-stat">
+                  <div class="num">2.5 rb</div>
+                  <div class="lbl">Prestasi</div>
+                </div>
+                <div class="hero-mini-stat">
+                  <div class="num">1.7 rb</div>
+                  <div class="lbl">Afirmasi</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Alur Pendaftaran -->
+      <section class="alur-section">
+        <div class="section-header" style="margin-bottom: 36px">
+          <div class="section-tag">Alur Pendaftaran</div>
+          <h2 class="section-title">5 Langkah Mudah Mendaftar</h2>
+          <p class="section-desc">
+            Ikuti langkah berikut untuk menyelesaikan pendaftaran PPDB SMP
+            online
+          </p>
+        </div>
+        <div class="alur-steps">
+          <div class="alur-step">
+            <div class="alur-num">1</div>
+            <div class="alur-step-title">Buat Akun</div>
+            <div class="alur-step-desc">NIK siswa &amp; email aktif</div>
+          </div>
+          <div class="alur-step">
+            <div class="alur-num">2</div>
+            <div class="alur-step-title">Data Siswa</div>
+            <div class="alur-step-desc">
+              Biodata, asal SD/MI, pilihan sekolah &amp; jalur
+            </div>
+          </div>
+          <div class="alur-step">
+            <div class="alur-num">3</div>
+            <div class="alur-step-title">Orang Tua</div>
+            <div class="alur-step-desc">Data ayah, ibu, &amp; alamat KK</div>
+          </div>
+          <div class="alur-step">
+            <div class="alur-num">4</div>
+            <div class="alur-step-title">Upload Dokumen</div>
+            <div class="alur-step-desc">
+              Ijazah, KK, Akta, foto &amp; dokumen jalur
+            </div>
+          </div>
+          <div class="alur-step">
+            <div class="alur-num">5</div>
+            <div class="alur-step-title">Kirim &amp; Pantau</div>
+            <div class="alur-step-desc">
+              Submit, cetak bukti, pantau status verifikasi
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Jalur Masuk -->
+      <section class="section" id="jalur">
+        <div class="section-header">
+          <div class="section-tag">Jalur Pendaftaran</div>
+          <h2 class="section-title">Empat Jalur Masuk SMP</h2>
+          <p class="section-desc">
+            Pilih jalur sesuai kriteria. Sesuai Permendikbud No. 1 Tahun 2021.
+          </p>
+        </div>
+        <div class="jalur-grid">
+          <div class="jalur-card" onclick="pilihJalur('Zonasi')">
+            <div class="jalur-icon">📍</div>
+            <div class="jalur-name">Jalur Zonasi</div>
+            <div class="jalur-desc">
+              Seleksi berdasarkan jarak domisili ke sekolah (koordinat GPS
+              sesuai KK).
+            </div>
+            <div class="jalur-kuota">Kuota min. 50%</div>
+          </div>
+          <div class="jalur-card" onclick="pilihJalur('Prestasi')">
+            <div class="jalur-icon">🏆</div>
+            <div class="jalur-name">Jalur Prestasi</div>
+            <div class="jalur-desc">
+              Berdasarkan nilai rapor SD/MI semester 1–5 dan prestasi lomba
+              kabupaten/nasional.
+            </div>
+            <div class="jalur-kuota">Kuota maks. 30%</div>
+          </div>
+          <div class="jalur-card" onclick="pilihJalur('Afirmasi')">
+            <div class="jalur-icon">🤝</div>
+            <div class="jalur-name">Jalur Afirmasi</div>
+            <div class="jalur-desc">
+              Untuk pemegang KIP, PKH, atau Surat Keterangan Tidak Mampu (SKTM).
+            </div>
+            <div class="jalur-kuota">Kuota min. 15%</div>
+          </div>
+          <div class="jalur-card" onclick="pilihJalur('Perpindahan Tugas')">
+            <div class="jalur-icon">🔄</div>
+            <div class="jalur-name">Perpindahan Tugas</div>
+            <div class="jalur-desc">
+              Anak ASN/TNI/Polri yang mengikuti perpindahan tugas orang tua
+              antar daerah.
+            </div>
+            <div class="jalur-kuota">Kuota maks. 5%</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Persyaratan -->
+      <section id="persyaratan" style="padding: 0 24px 80px; max-width: 1200px; margin: 0 auto">
+        <div class="section-header">
+          <div class="section-tag">Persyaratan</div>
+          <h2 class="section-title">Dokumen yang Diperlukan</h2>
+          <p class="section-desc">
+            Siapkan dokumen berikut sebelum memulai pendaftaran
+          </p>
+        </div>
+        <div class="syarat-grid">
+          <div class="syarat-card">
+            <div class="syarat-title">📋 Dokumen Wajib (Semua Jalur)</div>
+            <ul class="syarat-list">
+              <li>Ijazah / Surat Keterangan Lulus SD/MI</li>
+              <li>Kartu Keluarga (KK) asli + fotokopi</li>
+              <li>Akta Kelahiran</li>
+              <li>Pas foto terbaru 3×4 (latar merah)</li>
+              <li>Surat Keterangan Sehat dari Puskesmas/RS</li>
+            </ul>
+          </div>
+          <div class="syarat-card">
+            <div class="syarat-title">🏆 Tambahan Jalur Prestasi</div>
+            <ul class="syarat-list">
+              <li>Rapor SD/MI semester 1–5 (asli + fotokopi)</li>
+              <li>Piagam/sertifikat prestasi (jika ada)</li>
+              <li>Surat keterangan kepala SD/MI</li>
+            </ul>
+          </div>
+          <div class="syarat-card">
+            <div class="syarat-title">🤝 Tambahan Jalur Afirmasi</div>
+            <ul class="syarat-list">
+              <li>Kartu Indonesia Pintar (KIP) – jika ada</li>
+              <li>Kartu PKH / DTKS – jika ada</li>
+              <li>SKTM dari kelurahan/desa</li>
+            </ul>
+          </div>
+          <div class="syarat-card">
+            <div class="syarat-title">🔄 Tambahan Jalur Perpindahan Tugas</div>
+            <ul class="syarat-list">
+              <li>Surat tugas orang tua dari instansi resmi</li>
+              <li>Surat pengantar dari sekolah asal</li>
+              <li>Bukti mutasi/perpindahan tempat tinggal</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq-section" id="faq">
+        <div class="section-header" style="margin-bottom: 36px">
+          <div class="section-tag">FAQ</div>
+          <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+          <p class="section-desc">
+            Temukan jawaban atas pertanyaan umum seputar PPDB SMP
+          </p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span
+                >Siapa yang bisa mendaftar melalui PPDB SMP Online ini?</span
+              >
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-answer">
+              Lulusan SD/MI atau sederajat yang memiliki Ijazah atau Surat
+              Keterangan Lulus (SKL) tahun 2026, berusia maksimal 15 tahun, dan
+              berdomisili di wilayah yang ditentukan (untuk jalur zonasi).
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Apakah bisa mendaftar ke lebih dari satu sekolah?</span>
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-answer">
+              Ya. Setiap calon peserta dapat memilih maksimal
+              <strong>2 sekolah</strong> sebagai pilihan pertama dan pilihan
+              kedua dalam satu jalur pendaftaran. Jika tidak diterima di pilihan
+              pertama, sistem akan mempertimbangkan pilihan kedua secara
+              otomatis.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Bagaimana jika dokumen saya ditolak/diminta revisi?</span>
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-answer">
+              Anda akan mendapatkan notifikasi melalui email dan WhatsApp
+              beserta keterangan dokumen yang perlu diperbaiki. Login kembali ke
+              akun Anda dan unggah ulang dokumen yang diminta sebelum masa
+              verifikasi berakhir (8–12 Juni 2026).
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Kapan hasil seleksi diumumkan?</span>
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-answer">
+              Hasil seleksi akan diumumkan pada
+              <strong>15 Juni 2026</strong> melalui website PPDB online ini.
+              Notifikasi juga akan dikirimkan ke email dan nomor WhatsApp yang
+              terdaftar. Anda dapat mengecek hasil dengan memasukkan nomor
+              pendaftaran atau NISN di halaman Pengumuman.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Apa yang harus dilakukan setelah dinyatakan diterima?</span>
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-answer">
+              Lakukan <strong>daftar ulang</strong> pada 16–20 Juni 2026 dengan
+              membawa dokumen asli ke sekolah tujuan. Cetak Surat Penerimaan
+              melalui sistem PPDB online ini dan tunjukkan kepada panitia
+              sekolah. Kegagalan daftar ulang dalam batas waktu dianggap
+              mengundurkan diri.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Apakah pendaftaran dikenakan biaya?</span>
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-answer">
+              <strong>Tidak ada biaya pendaftaran.</strong> PPDB SMP Negeri di
+              bawah Dinas Pendidikan Kota Pontianak sepenuhnya gratis. Waspadai
+              penipuan yang mengatasnamakan panitia PPDB dan meminta pembayaran.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline -->
+      <section class="timeline-section" id="jadwal">
+        <div class="section-header">
+          <div
+            class="section-tag"
+            style="
+              background: rgba(255, 255, 255, 0.08);
+              color: var(--blue-soft);
+            "
+          >
+            Jadwal
+          </div>
+          <h2 class="section-title">Jadwal PPDB SMP 2026</h2>
+          <p class="section-desc">
+            Ikuti setiap tahapan sesuai jadwal yang ditetapkan Dinas Pendidikan
+          </p>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-status-badge aktif">● Sedang Berlangsung</div>
+            <div class="tl-date">1 – 7 Juni 2026</div>
+            <div class="tl-title">Pendaftaran Online</div>
+            <div class="tl-desc">
+              Buat akun, isi formulir, dan unggah dokumen persyaratan melalui
+              sistem PPDB SMP online.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-status-badge mendatang">● Akan Datang</div>
+            <div class="tl-date">8 – 12 Juni 2026</div>
+            <div class="tl-title">Verifikasi Dokumen</div>
+            <div class="tl-desc">
+              Panitia PPDB memverifikasi dokumen. Peserta dapat memperbaiki
+              dokumen jika diminta.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-status-badge mendatang">● Akan Datang</div>
+            <div class="tl-date">13 – 14 Juni 2026</div>
+            <div class="tl-title">Seleksi &amp; Pemeringkatan</div>
+            <div class="tl-desc">
+              Sistem melakukan pemeringkatan otomatis berdasarkan kriteria
+              masing-masing jalur.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-status-badge mendatang">● Akan Datang</div>
+            <div class="tl-date">15 Juni 2026</div>
+            <div class="tl-title">Pengumuman Hasil</div>
+            <div class="tl-desc">
+              Hasil seleksi diumumkan di website dan notifikasi dikirim ke
+              email/WhatsApp.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-status-badge mendatang">● Akan Datang</div>
+            <div class="tl-date">16 – 20 Juni 2026</div>
+            <div class="tl-title">Daftar Ulang</div>
+            <div class="tl-desc">
+              Konfirmasi penerimaan, lengkapi administrasi, dan cetak kartu
+              siswa baru.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-grid">
+            <div class="footer-brand">
+              <a href="#" class="nav-logo"
+                ><div class="nav-logo-icon">22</div>
+                <span class="nav-logo-text">PPDB Online</span></a
+              >
+              <p>
+                Sistem Penerimaan Peserta Didik Baru SMP Negeri 22 Kota Pontianak, Jl. Purnama Komplek Purnama Agung V. Dikelola oleh Dinas Pendidikan Kota Pontianak.
+              </p>
+            </div>
+            <div class="footer-col">
+              <h4>Informasi</h4>
+              <a href="#">Tentang PPDB</a>
+              <a href="#">Jalur Masuk</a>
+              <a href="#">Jadwal</a>
+              <a href="#">Kuota Sekolah</a>
+            </div>
+            <div class="footer-col">
+              <h4>Panduan</h4>
+              <a href="#">Cara Mendaftar</a>
+              <a href="#">Persyaratan</a>
+              <a href="#">FAQ</a>
+              <a href="#">Video Tutorial</a>
+            </div>
+            <div class="footer-col">
+              <h4>Kontak &amp; Bantuan</h4>
+              <a href="#">📧 ppdb-smp@disdik.go.id</a>
+              <a href="#">📞 (0561) 123-4567</a>
+              <a href="#">💬 WhatsApp Helpdesk</a>
+              <a href="#">📍 Dinas Pendidikan</a>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <span
+              >© 2026 PPDB SMP Negeri 22 · Dinas Pendidikan Kota Pontianak</span
+            >
+            <span>Kebijakan Privasi · Syarat &amp; Ketentuan</span>
+          </div>
+        </div>
+      </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
